@@ -58,7 +58,7 @@ public class WeatherData {
     }
 
     // Helper method to convert degrees (angles) to wind direction
-    private String getCompassDirection(double angle) {
+    public static String getCompassDirection(double angle) {
         String[] directions = {"North", "Northeast", "East", "Southeast", "South", "Southwest", "West","Northwest", "North"};
         return directions[(int)Math.round(((angle % 360) / 45))];
     }
