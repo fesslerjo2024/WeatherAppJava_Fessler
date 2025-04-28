@@ -2,6 +2,8 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.Scanner;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -9,17 +11,14 @@ public class LatLongToWeather {
 
     public static void getWeatherByZipCode(String zipCode) {
         try {
-            // Step 1: Get latitude and longitude from the zip code
             String[] latLong = ZipCodeToLatLong.getLatLong(zipCode);
             if (latLong != null) {
                 String latitude = latLong[0];
                 String longitude = latLong[1];
 
-                // Step 2: Construct the weather API URL using latitude and longitude
                 String apiURL = "https://api.open-meteo.com/v1/forecast?latitude=" + latitude + "&longitude=" + longitude
                         + "&hourly=temperature_2m,rain,wind_speed_10m,wind_direction_10m,weather_code,precipitation_probability&forecast_days=1&wind_speed_unit=mph&temperature_unit=fahrenheit";
 
-                // Step 3: Make the API request and get the response
                 URL url = new URL(apiURL);
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestMethod("GET");
@@ -37,7 +36,6 @@ public class LatLongToWeather {
                     in.close();
                     conn.disconnect();
 
-                    // Step 5: Parse the response
                     JSONObject jsonResponse = new JSONObject(content.toString());
                     JSONArray temperatures = jsonResponse.getJSONObject("hourly").getJSONArray("temperature_2m");
                     JSONArray rains = jsonResponse.getJSONObject("hourly").getJSONArray("rain");

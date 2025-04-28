@@ -2,6 +2,7 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.Scanner;
 
 import org.json.JSONObject;
 
@@ -9,7 +10,15 @@ public class ZipCodeToLatLong {
 
     public static String[] getLatLong(String zipCode) {
         try {
-            String apiURL = "https://api.zippopotam.us/us/" + zipCode;
+            Scanner scanner = new Scanner(System.in);
+            System.out.println("Enter Country: ");
+            String countryInput = scanner.nextLine();
+
+            String URL = WeatherData.getURLForCountry(countryInput);
+
+
+            String apiURL = "https://" + URL + zipCode;
+            System.out.println(apiURL);
             URL url = new URL(apiURL);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("GET");

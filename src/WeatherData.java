@@ -118,8 +118,7 @@ public class WeatherData {
     }
 
     public static String getURLForCountry(String countryInput) {
-        String country = countryInput.toUpperCase().trim();
-        String countryName = countryInput.trim().toLowerCase();
+        String country = countryInput.toLowerCase().trim();
 
         switch (country) {
             case "ad": case "andorra":
