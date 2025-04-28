@@ -57,8 +57,8 @@ public class LatLongToWeather {
                     int latestWeatherCode = weatherCodes.getInt(latestIndex);
                     double latestPrecipitationProbability = precipitationProbabilities.getDouble(latestIndex);
 
-                    // Directly call the static getCompassDirection method from WeatherData class
                     String windCompassDirection = WeatherData.getCompassDirection(latestWindDirection);
+                    String weatherCode = WeatherData.getWeatherDescription(latestWeatherCode);
 
                     // Format the values (e.g., to one decimal place)
                     String formattedTemperature = String.format("%.1f", latestTemperature);
@@ -72,7 +72,7 @@ public class LatLongToWeather {
                     System.out.println("Rain: " + formattedRain + " mm");
                     System.out.println("Wind Speed: " + formattedWindSpeed + " mph");
                     System.out.println("Wind Direction: " + windCompassDirection);
-                    System.out.println("Weather Code: " + latestWeatherCode);
+                    System.out.println("Weather Code: " + weatherCode);
                     System.out.println("Precipitation Probability: " + formattedPrecipitationProbability + "%");
 
                 } else {
