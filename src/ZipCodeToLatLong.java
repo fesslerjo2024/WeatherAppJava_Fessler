@@ -2,54 +2,54 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.Scanner;
 
 import org.json.JSONObject;
 
 public class ZipCodeToLatLong {
 
-    public static String[] getLatLong(String zipCode) {
+    public static String[] getLatLong(String input) {
         try {
-            Scanner scanner = new Scanner(System.in);
-            System.out.println("Enter Country: ");
-            String countryInput = scanner.nextLine();
+            String[] parts = input.split(",");
+            String zipCode = parts[0].trim();
+            String countryCode = parts[1].trim();
 
-            String URL = WeatherData.getURLForCountry(countryInput);
+            String urlCode = countryCode.toLowerCase();
+            String apiURL = "https://api.zippopotam.us/" + urlCode + "/" + zipCode;
 
-
-            String apiURL = "https://" + URL + zipCode;
-            System.out.println(apiURL);
             URL url = new URL(apiURL);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("GET");
 
             int responseCode = conn.getResponseCode();
-            if (responseCode == 200) { // 200 status OK
+            if (responseCode == 200) {
                 BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-                String inputLine;
                 StringBuilder content = new StringBuilder();
+                String line;
 
-                while ((inputLine = in.readLine()) != null) {
-                    content.append(inputLine);
+                while ((line = in.readLine()) != null) {
+                    content.append(line);
                 }
 
                 in.close();
                 conn.disconnect();
 
-                // Parse the response
                 JSONObject jsonResponse = new JSONObject(content.toString());
-                String latitude = jsonResponse.getJSONArray("places").getJSONObject(0).getString("latitude");
-                String longitude = jsonResponse.getJSONArray("places").getJSONObject(0).getString("longitude");
+                JSONObject place = jsonResponse.getJSONArray("places").getJSONObject(0);
 
-                // Returning the latitude and longitude as a string array
-                return new String[]{latitude, longitude};
+                String latitude = place.getString("latitude");
+                String longitude = place.getString("longitude");
+                String city = place.getString("place name");
+                String state = place.getString("state");
+                String country = jsonResponse.getString("country");
 
+                return new String[]{latitude, longitude, country, city, state};
             } else {
                 System.out.println("Error: Unable to fetch data for zip code " + zipCode);
             }
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-        return null; // Return null in case of error
+
+        return null;
     }
 }
