@@ -27,6 +27,8 @@ public class WeatherAppTerminal {
                     break;
 
                 case 2:
+                    // Lists all the available countries as well as the codes
+                    // required to make
                     WeatherData.listSupportedCountryCodes();
                     break;
 

@@ -44,6 +44,7 @@ public class WeatherAppDriver {
 
     @FXML
     public void initialize() {
+        // Loads comboBox with available countries
         ObservableList<String> countries = FXCollections.observableArrayList(
                 "Andorra", "Argentina", "American Samoa", "Austria", "Australia",
                 "Bangladesh", "Belgium", "Bulgaria", "Brazil", "Canada",
@@ -66,6 +67,7 @@ public class WeatherAppDriver {
 
     @FXML
     public void onGetWeatherButtonClick() {
+        // Gets zip and country from text field and combo box
         String zip = zipCodeField.getText();
         String country = countryComboBox.getValue();
 
@@ -76,6 +78,7 @@ public class WeatherAppDriver {
                 Task<WeatherInfo> fetchTask = new Task<>() {
                     @Override
                     protected WeatherInfo call() {
+                        // Returns as a string that can be deciphered by getWeatherByZipCode
                         String zipCodeWithCountry = zip + "," + countryCode;
                         return LatLongToWeather.getWeatherByZipCode(zipCodeWithCountry);
                     }
@@ -85,7 +88,14 @@ public class WeatherAppDriver {
                     WeatherInfo info = fetchTask.getValue();
                     if (info != null) {
                         countryLabel.setText(info.country);
-                        cityWeatherLabel.setText(info.city);
+                        // Checks to see if selected country is United States
+                        // if true the state is displayed as well as city
+                        if ("United States".equals(country)) {
+                            cityWeatherLabel.setText(info.city + ", " + info.state);
+                        } else {
+                            // by default just displays city
+                            cityWeatherLabel.setText(info.city);
+                        }
                         temperatureLabel.setText("Temperature: " + info.temperature);
                         rainLabel.setText("Rain: " + info.rain);
                         windSpeedLabel.setText("Wind Speed: " + info.windSpeed);
@@ -93,7 +103,15 @@ public class WeatherAppDriver {
                         weatherCodeLabel.setText("Weather Code: " + info.weatherCode);
                         precipitationLabel.setText("Precipitation Probability: " + info.precipitationProbability);
                     } else {
-                        countryLabel.setText("Error fetching data.");
+                        // Error handling if zip code is invalid
+                        countryLabel.setText("Invalid Zip Code");
+                        cityWeatherLabel.setText("");
+                        temperatureLabel.setText("");
+                        rainLabel.setText("");
+                        windSpeedLabel.setText("");
+                        windDirectionLabel.setText("");
+                        weatherCodeLabel.setText("");
+                        precipitationLabel.setText("");
                     }
                 });
 

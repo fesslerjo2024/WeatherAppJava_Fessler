@@ -15,20 +15,24 @@ public class LatLongToWeather {
 
     public static WeatherInfo getWeatherByZipCode(String zipCodeWithCountry) {
         try {
+            // Gets array of information from ZipCodeToLatLong
             String[] locationData = ZipCodeToLatLong.getLatLong(zipCodeWithCountry);
             if (locationData != null) {
+                // Reassigns information to Strings
                 String latitude = locationData[0];
                 String longitude = locationData[1];
                 String country = locationData[2];
                 String city = locationData[3];
                 String state = locationData[4];
 
+                // Inputs longitude and latitude into apiURL
                 String apiURL = "https://api.open-meteo.com/v1/forecast?latitude=" + latitude + "&longitude=" + longitude
                         + "&hourly=temperature_2m,rain,wind_speed_10m,wind_direction_10m,weather_code,precipitation_probability&forecast_days=1&wind_speed_unit=mph&temperature_unit=fahrenheit";
                 URL url = new URL(apiURL);
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestMethod("GET");
 
+                // Tests response and gets information
                 if (conn.getResponseCode() == 200) {
                     BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
                     StringBuilder content = new StringBuilder();
@@ -39,6 +43,7 @@ public class LatLongToWeather {
                     in.close();
                     conn.disconnect();
 
+                    // Puts the jsonResponse into an JSONArray
                     JSONObject jsonResponse = new JSONObject(content.toString());
                     JSONArray times = jsonResponse.getJSONObject("hourly").getJSONArray("time");
                     JSONArray temperatures = jsonResponse.getJSONObject("hourly").getJSONArray("temperature_2m");
@@ -51,7 +56,8 @@ public class LatLongToWeather {
                     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
                     ZonedDateTime nowUTC = ZonedDateTime.now(ZoneOffset.UTC);
 
-                    // Find index with closest time
+                    // Uses time array in JSON to find the closest index
+                    // then uses that index to display the weather data closest to the current time
                     int closestIndex = -1;
                     long smallestDiff = Long.MAX_VALUE;
                     for (int i = 0; i < times.length(); i++) {
@@ -67,6 +73,7 @@ public class LatLongToWeather {
                         throw new RuntimeException("No suitable time found in weather data.");
                     }
 
+                    // Uses WeatherInfo class to store information using closestIndex
                     WeatherInfo info = new WeatherInfo();
                     info.country = country;
                     info.city = city;

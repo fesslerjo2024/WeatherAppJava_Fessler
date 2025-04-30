@@ -3,9 +3,9 @@ public class WeatherData {
     private String location;
     private double temperature;
     private static String weatherDescription;
-    private String state; // Added setter for this field
-    private String placeName; // Added setter for this field
-    private String country; // Added setter for this field
+    private String state;
+    private String placeName;
+    private String country;
     private double windDirection;
     private double windSpeed;
 
@@ -59,7 +59,6 @@ public class WeatherData {
         this.windDirection = windDirection;
     }
 
-    // Setter and Getter for state (added)
     public String getState() {
         return state;
     }
@@ -68,7 +67,6 @@ public class WeatherData {
         this.state = state;
     }
 
-    // Setter and Getter for placeName (added)
     public String getPlaceName() {
         return placeName;
     }
@@ -77,7 +75,6 @@ public class WeatherData {
         this.placeName = placeName;
     }
 
-    // Setter and Getter for country (added)
     public String getCountry() {
         return country;
     }
@@ -149,7 +146,7 @@ public class WeatherData {
         }
     }
 
-    // Method to get country code for the input country name
+    // Method to check listBox input and assign weather code to it
     public static String getURLForCountry(String countryInput) {
         String country = countryInput.toLowerCase().trim();
 
@@ -307,13 +304,75 @@ public class WeatherData {
         // List of countries and their codes
         System.out.println("Andorra - AD");
         System.out.println("Argentina - AR");
+        System.out.println("American Samoa - AS");
+        System.out.println("Austria - AT");
         System.out.println("Australia - AU");
+        System.out.println("Bangladesh - BD");
+        System.out.println("Belgium - BE");
+        System.out.println("Bulgaria - BG");
         System.out.println("Brazil - BR");
         System.out.println("Canada - CA");
-        System.out.println("France - FR");
+        System.out.println("Switzerland - CH");
+        System.out.println("Czech Republic - CZ");
         System.out.println("Germany - DE");
+        System.out.println("Denmark - DK");
+        System.out.println("Dominican Republic - DO");
+        System.out.println("Spain - ES");
+        System.out.println("Finland - FI");
+        System.out.println("Faroe Islands - FO");
+        System.out.println("France - FR");
+        System.out.println("Great Britain - GB");
+        System.out.println("French Guyana - GF");
+        System.out.println("Guernsey - GG");
+        System.out.println("Greenland - GL");
+        System.out.println("Guadeloupe - GP");
+        System.out.println("Guatemala - GT");
+        System.out.println("Guam - GU");
+        System.out.println("Guyana - GY");
+        System.out.println("Croatia - HR");
+        System.out.println("Hungary - HU");
+        System.out.println("Isle of Man - IM");
+        System.out.println("India - IN");
+        System.out.println("Iceland - IS");
+        System.out.println("Italy - IT");
+        System.out.println("Jersey - JE");
+        System.out.println("Japan - JP");
+        System.out.println("Liechtenstein - LI");
+        System.out.println("Sri Lanka - LK");
+        System.out.println("Lithuania - LT");
+        System.out.println("Luxembourg - LU");
+        System.out.println("Monaco - MC");
+        System.out.println("Moldavia - MD");
+        System.out.println("Marshall Islands - MH");
+        System.out.println("Macedonia - MK");
+        System.out.println("Northern Mariana Islands - MP");
+        System.out.println("Martinique - MQ");
+        System.out.println("Mexico - MX");
+        System.out.println("Malaysia - MY");
+        System.out.println("Holland - NL");
+        System.out.println("Norway - NO");
+        System.out.println("New Zealand - NZ");
+        System.out.println("Phillippines - PH");
+        System.out.println("Pakistan - PK");
+        System.out.println("Poland - PL");
+        System.out.println("Saint Pierre and Miquelon - PM");
+        System.out.println("Puerto Rico - PR");
+        System.out.println("Portugal - PT");
+        System.out.println("French Reunion - RE");
+        System.out.println("Russia - RU");
+        System.out.println("Sweden - SE");
+        System.out.println("Slovenia - SI");
+        System.out.println("Svalbard & Jan Mayen Islands - SJ");
+        System.out.println("Slovak Republic - SK");
+        System.out.println("San Marino - SM");
+        System.out.println("Thailand - TH");
+        System.out.println("Turkey - TR");
         System.out.println("United States - US");
-        // Add other countries here...
+        System.out.println("Vatican - VA");
+        System.out.println("Virgin Islands - VI");
+        System.out.println("Mayotte - YT");
+        System.out.println("South Africa - ZA");
+
         System.out.println();
     }
 }
