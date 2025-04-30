@@ -1,7 +1,10 @@
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
+import java.net.URI;
 import java.net.URL;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 
 import org.json.JSONObject;
 
@@ -11,13 +14,17 @@ public class ZipCodeToLatLong {
         try {
             // Takes inputted string (zipCode, countryCode) and splits it
             String[] parts = input.split(",");
-            String zipCode = parts[0].trim();
-            String countryCode = parts[1].trim();
+            String zipCode = parts[0];
+            String countryCode = parts[1];
+
+            zipCode = zipCode.replace(" ", "%20");
+
 
             String urlCode = countryCode.toLowerCase();
 
             // Formats into the apiURL
             String apiURL = "https://api.zippopotam.us/" + urlCode + "/" + zipCode;
+            System.out.println(apiURL);
 
             URL url = new URL(apiURL);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
