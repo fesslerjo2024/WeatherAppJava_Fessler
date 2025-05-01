@@ -85,6 +85,17 @@ public class LatLongToWeather {
                     info.windDirection = WeatherData.getCompassDirection(windDirections.getInt(closestIndex));
                     info.weatherCode = WeatherData.getWeatherDescription(weatherCodes.getInt(closestIndex));
                     info.precipitationProbability = String.format("%.1f%%", precipitationProbabilities.getDouble(closestIndex));
+
+                    System.out.println("\nCountry: " + country);
+                    System.out.println("City: " + city);
+                    System.out.println("State: " + state);
+                    System.out.println("Temperature: " + String.format("%.1f°F", temperatures.getDouble(closestIndex)));
+                    System.out.println("Rain: " + String.format("%.1f mm", rains.getDouble(closestIndex)));
+                    System.out.println("Wind Speed: " + String.format("%.1f mph", windSpeeds.getDouble(closestIndex)));
+                    System.out.println("Wind Direction: " + WeatherData.getCompassDirection(windDirections.getInt(closestIndex)));
+                    System.out.println("Weather Code: " + WeatherData.getWeatherDescription(weatherCodes.getInt(closestIndex)));
+                    System.out.println("Precipitation Probability: " + String.format("%.1f%%", precipitationProbabilities.getDouble(closestIndex)) + "\n");
+
                     return info;
                 }
             }

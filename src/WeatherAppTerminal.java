@@ -2,8 +2,6 @@ import java.util.Scanner;
 
 public class WeatherAppTerminal {
 
-    // Does not work anymore after making changes to allow the JavaFX version to work
-
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         boolean running = true;
@@ -21,7 +19,7 @@ public class WeatherAppTerminal {
             switch (choice) {
                 case 1:
                     System.out.println("Enter a Zip Code and Country Code");
-                    System.out.println("Example: 68780 US");
+                    System.out.println("Example: 68780,US");
                     String input = scanner.nextLine();
                     LatLongToWeather.getWeatherByZipCode(input);
                     break;
