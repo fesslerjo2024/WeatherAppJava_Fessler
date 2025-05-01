@@ -29,6 +29,7 @@ public class LatLongToWeather {
                 String apiURL = "https://api.open-meteo.com/v1/forecast?latitude=" + latitude + "&longitude=" + longitude
                         + "&hourly=temperature_2m,rain,wind_speed_10m,wind_direction_10m,weather_code,precipitation_probability&forecast_days=1&wind_speed_unit=mph&temperature_unit=fahrenheit";
                 URL url = new URL(apiURL);
+                System.out.println(apiURL);
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestMethod("GET");
 

@@ -118,29 +118,49 @@ public class WeatherData {
             case 48:
                 return "Foggy";
             case 51:
+                return "Light Drizzle";
             case 53:
+                return "Moderate Drizzle";
             case 55:
-                return "Drizzle";
+                return "Dense Drizzle";
+            case 56:
+                return "Light Freezing Drizzle";
+            case 57:
+                return "Dense Freezing Drizzle";
             case 61:
+                return "Slight Rain";
             case 63:
                 return "Moderate rain";
             case 65:
-                return "Rain";
+                return "Heavy Rain";
+            case 66:
+                return "Light Freezing Rain";
+            case 67:
+                return "Heavy Freezing Rain";
             case 71:
                 return "Slight snow fall";
             case 73:
                 return "Moderate snow fall";
             case 75:
                 return "Heavy and intense snow";
+            case 77:
+                return "Snow grains";
             case 80:
                 return "Slight rain showers";
             case 81:
                 return "Moderate rain showers";
+            case 82:
+                return "Violent rain showers";
+            case 85:
+                return "Slight snow showers";
+            case 86:
+                return "Moderate snow showers";
             case 95:
                 return "Thunderstorms";
             case 96:
+                return "Thunderstorms with slight hail";
             case 99:
-                return "Severe thunderstorms";
+                return "Thunderstorms with heavy hail";
             default:
                 return "Unknown weather condition";
         }

@@ -6,6 +6,8 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.concurrent.Task;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 public class WeatherAppDriver {
 
@@ -41,6 +43,9 @@ public class WeatherAppDriver {
 
     @FXML
     private Label precipitationLabel;
+
+    @FXML
+    private ImageView backgroundImageView; // Reference to ImageView in FXML
 
     @FXML
     public void initialize() {
@@ -87,21 +92,32 @@ public class WeatherAppDriver {
                 fetchTask.setOnSucceeded(event -> {
                     WeatherInfo info = fetchTask.getValue();
                     if (info != null) {
-                        countryLabel.setText(info.country);
-                        // Checks to see if selected country is United States
-                        // if true the state is displayed as well as city
-                        if ("United States".equals(country)) {
-                            cityWeatherLabel.setText(info.city + ", " + info.state);
+                        boolean isCityStateSame = info.city != null && info.city.equalsIgnoreCase(info.state);
+                        boolean isStateCountrySame = info.state != null && info.state.equalsIgnoreCase(info.country);
+
+                        String locationDisplay;
+                        if (isStateCountrySame) {
+                            locationDisplay = info.country;
+                        } else if (isCityStateSame) {
+                            locationDisplay = info.city;
+                        } else if ("United States".equals(country)) {
+                            locationDisplay = info.city + ", " + info.state;
                         } else {
-                            // by default just displays city
-                            cityWeatherLabel.setText(info.city);
+                            locationDisplay = info.city;
                         }
+
+                        countryLabel.setText(info.country);
+                        cityWeatherLabel.setText(locationDisplay);
                         temperatureLabel.setText("Temperature: " + info.temperature);
                         rainLabel.setText("Rain: " + info.rain);
                         windSpeedLabel.setText("Wind Speed: " + info.windSpeed);
                         windDirectionLabel.setText("Wind Direction: " + info.windDirection);
                         weatherCodeLabel.setText("Weather Code: " + info.weatherCode);
+                        System.out.println(info.weatherCode);
                         precipitationLabel.setText("Precipitation Probability: " + info.precipitationProbability);
+
+                        // Update background image based on weather condition
+                        updateWeatherImage(info.weatherCode);
                     } else {
                         // Error handling if zip code is invalid
                         countryLabel.setText("Invalid Zip Code");
@@ -123,5 +139,59 @@ public class WeatherAppDriver {
         } else {
             countryLabel.setText("Please enter a valid zip code and select a country.");
         }
+    }
+
+    // Method to update background image based on weather condition
+    private void updateWeatherImage(String weatherCode) {
+        String imageFileName;
+        switch (weatherCode) {
+            case "Clear sky":
+                imageFileName = "clearsky.jpg";
+                break;
+            case "Mainly clear":
+            case "Partly cloudy":
+                imageFileName = "partly_cloudy.jpeg";
+                break;
+            case "Overcast":
+                imageFileName = "cloudy.jpg";
+                break;
+            case "Foggy":
+                imageFileName = "foggy.jpg";
+                break;
+            case "Light Drizzle":
+            case "Moderate Drizzle":
+            case "Dense Drizzle":
+            case "Light Freezing Drizzle":
+            case "Dense Freezing Drizzle":
+            case "Slight Rain":
+            case "Moderate rain":
+            case "Heavy Rain":
+            case "Light Freezing Rain":
+            case "Heavy Freezing Rain":
+            case "Slight rain showers":
+            case "Moderate rain showers":
+            case "Violent rain showers":
+                imageFileName = "rainy.jpg";
+                break;
+            case "Slight snow fall":
+            case "Moderate snow fall":
+            case "Heavy and intense snow":
+            case "Snow grains":
+            case "Slight snow showers":
+            case "Moderate snow showers":
+                imageFileName = "snowy.webp";
+                break;
+            case "Thunderstorms":
+            case "Thunderstorms with slight hail":
+            case "Thunderstorms with heavy hail":
+                imageFileName = "stormy.jpg";
+                break;
+            default:
+                imageFileName = "default.jpg";
+                break;
+        }
+        // Load the appropriate image based on the weather code
+        Image newImage = new Image(getClass().getResourceAsStream("/images/" + imageFileName));
+        backgroundImageView.setImage(newImage);
     }
 }

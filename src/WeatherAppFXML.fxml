@@ -4,6 +4,8 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -12,6 +14,13 @@
 
 <AnchorPane prefHeight="468.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="WeatherAppDriver">
     <children>
+        <!-- Set fx:id to link this ImageView to the backgroundImageView field in the controller -->
+        <ImageView fx:id="backgroundImageView" fitHeight="477.0" fitWidth="606.0" layoutX="-5.0" layoutY="-7.0" pickOnBounds="true">
+            <image>
+                <Image url="@images/clearsky.jpg" />
+            </image>
+        </ImageView>
+
         <GridPane hgap="10" layoutX="14.0" layoutY="80.0" prefHeight="340.0" prefWidth="576.0" vgap="10">
             <columnConstraints>
                 <ColumnConstraints prefWidth="150.0" />
@@ -32,30 +41,31 @@
             </rowConstraints>
 
             <!-- Zip code input -->
-            <Label text="Zip Code:" GridPane.columnIndex="0" />
+            <Label style="-fx-background-color: white;" text="Zip Code:" GridPane.columnIndex="0" />
             <TextField fx:id="zipCodeField" prefHeight="26.0" prefWidth="230.0" GridPane.columnIndex="1" />
 
             <!-- Country selection -->
-            <Label text="Country:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+            <Label style="-fx-background-color: white;" text="Country:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
             <ComboBox fx:id="countryComboBox" prefWidth="200.0" promptText="Select Country" GridPane.columnIndex="1" GridPane.rowIndex="1" />
 
             <!-- Submit button -->
-            <Button fx:id="getWeatherButton" onAction="#onGetWeatherButtonClick" prefHeight="39.0" prefWidth="87.0" text="Get Weather" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Button fx:id="getWeatherButton" onAction="#onGetWeatherButtonClick" prefHeight="39.0" prefWidth="87.0" style="-fx-background-color: white;" text="Get Weather" GridPane.columnIndex="1" GridPane.rowIndex="2" />
 
             <!-- Output labels -->
-            <Label fx:id="countryLabel" text="" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <Label fx:id="cityWeatherLabel" text="" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-            <Label fx:id="temperatureLabel" text="" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-            <Label fx:id="rainLabel" text="" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-            <Label fx:id="windSpeedLabel" text="" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-            <Label fx:id="windDirectionLabel" text="" GridPane.columnIndex="1" GridPane.rowIndex="8" />
-            <Label fx:id="weatherCodeLabel" text="" GridPane.columnIndex="1" GridPane.rowIndex="9" />
-            <Label fx:id="precipitationLabel" text="" GridPane.columnIndex="1" GridPane.rowIndex="10" />
+            <Label fx:id="countryLabel" style="-fx-background-color: white;" text="" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <Label fx:id="cityWeatherLabel" style="-fx-background-color: white;" text="" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <Label fx:id="temperatureLabel" style="-fx-background-color: white;" text="" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            <Label fx:id="rainLabel" style="-fx-background-color: white;" text="" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+            <Label fx:id="windSpeedLabel" style="-fx-background-color: white;" text="" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+            <Label fx:id="windDirectionLabel" style="-fx-background-color: white;" text="" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+            <Label fx:id="weatherCodeLabel" style="-fx-background-color: white;" text="" GridPane.columnIndex="1" GridPane.rowIndex="9" />
+            <Label fx:id="precipitationLabel" style="-fx-background-color: white;" text="" GridPane.columnIndex="1" GridPane.rowIndex="10" />
         </GridPane>
-      <Label layoutX="148.0" layoutY="14.0" text="Zip Code to Weather">
-         <font>
-            <Font size="33.0" />
-         </font>
-      </Label>
+
+        <Label layoutX="148.0" layoutY="14.0" style="-fx-background-color: white;" text="Zip Code to Weather">
+            <font>
+                <Font size="33.0" />
+            </font>
+        </Label>
     </children>
 </AnchorPane>
